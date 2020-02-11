@@ -77,10 +77,10 @@ while true
     drawnow;
     
     % Write to file
-    fprintf(fid,'%25.4s %25.4f %25.4f\n', datestr(t), str2double(splitString(1)), str2double(splitString(2)));
+    fprintf(fid,'%25s %25.4f %25.4f\n', datestr(t,'HH:MM:SS'), str2double(splitString(1)), str2double(splitString(2)));
     
     % Print to command window
-    fprintf('%25.4s %25.4f %25.4f\n', datestr(t), str2double(splitString(1)), str2double(splitString(2)));
+    fprintf('%25s %25.4f %25.4f\n', datestr(t,'HH:MM:SS'), str2double(splitString(1)), str2double(splitString(2)));
     
 end
 
