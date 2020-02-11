@@ -4,6 +4,8 @@
 %   Name: Jonathan Tran
 %
 %
+%   MAKE SURE TO CLOSE THE ARDUINO IDE BEFORE RUNNING THE MATLAB SCRIPT
+%
 
 %% Serialport initialization
 clear all;
@@ -16,9 +18,8 @@ flush(s); % Remove any buffered serial data
 
 configureTerminator(s,'CR');
 
-%% Read Data
+%% Initialize Figures
 
-% Initialize Figures
 figure(1)
 h1 = animatedline;
 ax1 = gca;
@@ -35,6 +36,8 @@ ax2.YLim = [0 1000];
 xlabel('Elapsed time (sec)')
 ylabel('Pressure Transducer Data (psi)')
 
+%% Write Data to File
+
 startTime = datetime('now');
 
 % Create new file name
@@ -46,6 +49,8 @@ fid = fopen(file_name,'wt');
 fprintf(fid, '%25s %25s %25s\n','Time (s)','Force (lb)','Pressure (psi)');
 
 fprintf('%25s %25s %25s\n','Time (s)','Force (lb)','Pressure (psi)');
+
+%% Read Data
 
 while true
     % Read new line from serial
@@ -79,4 +84,6 @@ while true
     
 end
 
+% The script will never leave the loop, but remember to run this command to
+% close the notepad file
 fclose(fid);
