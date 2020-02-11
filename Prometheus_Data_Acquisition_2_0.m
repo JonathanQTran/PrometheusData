@@ -24,7 +24,7 @@ figure(1)
 h1 = animatedline;
 ax1 = gca;
 ax1.YGrid = 'on';
-ax1.YLim = [0 1000];
+% ax1.YLim = [0 1000];
 xlabel('Elapsed time (sec)')
 ylabel('Load Cell Data (lbs)')
 
@@ -32,7 +32,7 @@ figure(2)
 h2 = animatedline;
 ax2 = gca;
 ax2.YGrid = 'on';
-ax2.YLim = [0 1000];
+% ax2.YLim = [0 1000];
 xlabel('Elapsed time (sec)')
 ylabel('Pressure Transducer Data (psi)')
 
@@ -61,7 +61,7 @@ while true
     splitString = split(data,',');
 
     % Plot first data value
-    figure(1)
+%     figure(1)
     addpoints(h1,datenum(t),str2double(splitString(1)))
     ax1.XLim = datenum([t-seconds(15) t]);
     
@@ -69,7 +69,7 @@ while true
     drawnow;
     
     % Plot second data value
-    figure(2)
+%     figure(2)
     addpoints(h2,datenum(t),str2double(splitString(2)))
     ax2.XLim = datenum([t-seconds(15) t]);
     
@@ -77,10 +77,10 @@ while true
     drawnow;
     
     % Write to file
-    fprintf(fid,'%25.4f %25.4f %25.4f\n', datestr(t), str2double(splitString(1)), str2double(splitString(2)));
+    fprintf(fid,'%25.4s %25.4f %25.4f\n', datestr(t), str2double(splitString(1)), str2double(splitString(2)));
     
     % Print to command window
-    fprintf('%25.4f %25.4f %25.4f\n', datestr(t), str2double(splitString(1)), str2double(splitString(2)));
+    fprintf('%25.4s %25.4f %25.4f\n', datestr(t), str2double(splitString(1)), str2double(splitString(2)));
     
 end
 
