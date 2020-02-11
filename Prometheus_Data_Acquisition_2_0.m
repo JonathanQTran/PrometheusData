@@ -75,8 +75,7 @@ while true
     fprintf(fid,'%25.4f %25.4f %25.4f\n', datestr(t), str2double(splitString(1)), str2double(splitString(2)));
     
     % Print to command window
-    fprintf('%25.4f %25.4f %25.4f\n', datestr(t), str2double(splitString(1)), str2double(splitString(2)))
-    % fprintf('%s',data);
+    fprintf('%25.4f %25.4f %25.4f\n', datestr(t), str2double(splitString(1)), str2double(splitString(2)));
     
 end
 
