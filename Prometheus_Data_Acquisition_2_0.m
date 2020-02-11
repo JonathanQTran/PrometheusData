@@ -19,7 +19,7 @@ configureTerminator(s,'CR');
 %% Read Data
 
 % Initialize Figures
-figure
+figure(1)
 h1 = animatedline;
 ax1 = gca;
 ax1.YGrid = 'on';
@@ -27,7 +27,7 @@ ax1.YLim = [0 1000];
 xlabel('Elapsed time (sec)')
 ylabel('Load Cell Data (lbs)')
 
-figure
+figure(2)
 h2 = animatedline;
 ax2 = gca;
 ax2.YGrid = 'on';
@@ -37,14 +37,15 @@ ylabel('Pressure Transducer Data (psi)')
 
 startTime = datetime('now');
 
-tic;
-
 % Create new file name
 date = datestr(startTime,'mmm dd, yyyy (HH;MM;SS)');
 file_name = append(date,'.txt');
 
+% Create new file
 fid = fopen(file_name,'wt');
 fprintf(fid, '%25s %25s %25s\n','Time (s)','Force (lb)','Pressure (psi)');
+
+fprintf('%25s %25s %25s\n','Time (s)','Force (lb)','Pressure (psi)');
 
 while true
     % Read new line from serial
@@ -55,6 +56,7 @@ while true
     splitString = split(data,',');
 
     % Plot first data value
+    figure(1)
     addpoints(h1,datenum(t),str2double(splitString(1)))
     ax1.XLim = datenum([t-seconds(15) t]);
     
@@ -62,6 +64,7 @@ while true
     drawnow;
     
     % Plot second data value
+    figure(2)
     addpoints(h2,datenum(t),str2double(splitString(2)))
     ax2.XLim = datenum([t-seconds(15) t]);
     
@@ -70,10 +73,11 @@ while true
     
     % Write to file
     fprintf(fid,'%25.4f %25.4f %25.4f\n', datestr(t), str2double(splitString(1)), str2double(splitString(2)));
-    fprintf('%s',data);
+    
+    % Print to command window
+    fprintf('%25.4f %25.4f %25.4f\n', datestr(t), str2double(splitString(1)), str2double(splitString(2)))
+    % fprintf('%s',data);
     
 end
 
 fclose(fid);
-
-
